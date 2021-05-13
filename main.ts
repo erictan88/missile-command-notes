@@ -4,8 +4,8 @@ namespace SpriteKind {
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (Fired == 0) {
         Fired = 1
-        Target_X_Position = Targeting_System.x
-        Target_Y_Position = Targeting_System.y
+        Target_X_Position = Targeting.x
+        Target_Y_Position = Targeting.y
         projectile = sprites.create(img`
             . . . . . . . . . . . . . . . . 
             . . . . . . . . . . . . . . . . 
@@ -26,7 +26,6 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
             `, SpriteKind.Projectile)
         projectile.setPosition(Base.x, Base.y)
         projectile.setVelocity(Target_X_Position - Base.x, Target_Y_Position - Base.y)
-        pause(1000)
     }
 })
 scene.onHitWall(SpriteKind.Enemy, function (sprite, location) {
@@ -51,7 +50,7 @@ let Target_X_Position = 0
 let Damage = 0
 let Fired = 0
 let Base: Sprite = null
-let Targeting_System: Sprite = null
+let Targeting: Sprite = null
 scene.setBackgroundImage(img`
     9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
     9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
@@ -175,7 +174,7 @@ scene.setBackgroundImage(img`
     7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
     `)
 tiles.setTilemap(tilemap`level2`)
-Targeting_System = sprites.create(img`
+Targeting = sprites.create(img`
     . . . . . . . . . . . . . . . . 
     . . . . 2 2 2 2 2 2 2 . . . . . 
     . . . 2 . . . . . . . 2 . . . . 
@@ -193,7 +192,7 @@ Targeting_System = sprites.create(img`
     . . . . . . . . . . . . . . . . 
     . . . . . . . . . . . . . . . . 
     `, SpriteKind.Target)
-controller.moveSprite(Targeting_System, 100, 100)
+controller.moveSprite(Targeting, 100, 100)
 Base = sprites.create(img`
     ................................
     .............eeeee..............
@@ -351,5 +350,5 @@ game.onUpdateInterval(5000, function () {
         . . . . . . . . . . . . . . . . 
         `, SpriteKind.Enemy)
     Missile.setPosition(randint(40, 80), 5)
-    Missile.setVelocity(randint(-30, 30), randint(10, 30))
+    Missile.setVelocity(randint(-30, 30), 30)
 })
